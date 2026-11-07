@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Mágico Oficial | Hogwarts Orión — Ministerio Diamante</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+    <style>
+        :root {
+            --gold: #d4af37; --gold-l: #f7e29c; --gold-d: #8c6d23;
+            --bg-deep: #05070b; --bg-card: rgba(13, 17, 24, 0.94);
+            --border-ornate: rgba(212, 175, 55, 0.35); --text-m: #f1f5f9; --text-muted: #94a3b8;
+            --house-c: #10b981; --house-glow: rgba(16, 185, 129, 0.3);
+            --house-grad: linear-gradient(135deg, #072716 0%, #03120a 100%);
+            --house-b: #34d399;
+        }
+
+        body.theme-slytherin { --house-c:#10b981; --house-glow:rgba(16,185,129,0.35); --house-grad:linear-gradient(135deg,#072716 0%,#03120a 100%); --house-b:#34d399; }
+        body.theme-gryffindor { --house-c:#ef4444; --house-glow:rgba(239,68,68,0.35); --house-grad:linear-gradient(135deg,#300808 0%,#150202 100%); --house-b:#f87171; }
+        body.theme-ravenclaw { --house-c:#38bdf8; --house-glow:rgba(56,189,248,0.35); --house-grad:linear-gradient(135deg,#081d3a 0%,#020b18 100%); --house-b:#60a5fa; }
+        body.theme-hufflepuff { --house-c:#eab308; --house-glow:rgba(234,179,8,0.35); --house-grad:linear-gradient(135deg,#2a2004 0%,#120e02 100%); --house-b:#facc15; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-deep);
+            background-image: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.15) 0%, transparent 60%),
+                              radial-gradient(circle at 10% 30%, var(--house-glow) 0%, transparent 50%),
+                              url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.02'%3E%3Cpath d='M30 30L15 0h30L30 30zM0 30l30 15v30L0 30zm60 0L30 45v30l30-45z'/%3E%3C/g%3E%3C/svg%3E");
+            font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-m);
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            padding: 15px 12px 60px; transition: background 0.4s ease;
+        }
+
+        header { width: 100%; max-width: 1100px; text-align: center; padding: 10px 10px 15px; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+        .badge-ministerio {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(212, 175, 55, 0.1); border: 1px solid var(--border-ornate);
+            border-radius: 999px; padding: 5px 14px; font-size: 10.5px;
+            letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-l);
+        }
+        .dot-pulse { width: 7px; height: 7px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
+
+        .btn-director {
+            background: rgba(212, 175, 55, 0.12); border: 1px solid var(--border-ornate);
+            color: var(--gold-l); font-size: 11px; font-weight: 700;
+            padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: 0.2s;
+            display: inline-flex; align-items: center; gap: 5px;
+        }
+        .btn-director:hover { background: var(--gold); color: #000; }
+        .btn-director.active { background: #10b981; color: #fff; border-color: #34d399; }
+
+        h1.titulo {
+            font-family: 'Cinzel Decorative', 'Cinzel', serif;
+            font-size: clamp(22px, 4.5vw, 36px); font-weight: 700; color: #fff;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.4); letter-spacing: 1.5px; margin-bottom: 4px;
+        }
+        h1.titulo span { color: var(--gold-l); }
+        .sub-titulo {
+            font-size: 11px; color: var(--text-muted); letter-spacing: 2px;
+            text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .sub-titulo::before, .sub-titulo::after { content: ''; width: 35px; height: 1px; background: var(--border-ornate); }
+
+        .banner-bloqueo {
+            background: rgba(234, 179, 8, 0.15); border: 1px solid #facc15;
+            color: #fef08a; padding: 12px 18px; border-radius: 12px; margin-bottom: 18px;
+            font-size: 12px; line-height: 1.5; text-align: center; display: none; width: 100%;
+        }
+
+        nav.nav-tabs {
+            display: flex; gap: 6px; background: rgba(10, 14, 22, 0.85);
+            padding: 5px; border-radius: 12px; border: 1px solid var(--border-ornate);
+            margin: 15px 0 25px; max-width: 95vw; overflow-x: auto;
+        }
+        .nav-btn {
+            background: transparent; border: none; color: var(--text-muted);
+            font-family: 'Cinzel', serif; font-weight: 700; font-size: 12px;
+            padding: 9px 16px; border-radius: 8px; cursor: pointer; transition: 0.2s;
+            white-space: nowrap; display: flex; align-items: center; gap: 6px;
+        }
+        .nav-btn.active, .nav-btn:hover { background: rgba(212, 175, 55, 0.15); color: #fff; }
+        .nav-btn.active { border: 1px solid var(--gold); color: var(--gold-l); }
+
+        main { width: 100%; max-width: 1100px; }
+        .view-section { display: none; }
+        .view-section.active-view { display: block; }
+
+        .workspace { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        @media (min-width: 950px) { .workspace { grid-template-columns: 1.05fr 0.95fr; align-items: start; } }
+
+        .glass-box {
+            background: var(--bg-card); border: 1px solid var(--border-ornate);
+            border-radius: 16px; padding: 22px; position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(14px);
+        }
+        .panel-head {
+            font-family: 'Cinzel', serif; font-size: 16px; color: var(--gold-l);
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 18px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 8px;
+        }
+
+        /* GÉNERO */
+        .genero-selector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+        .gen-opt input { display: none; }
+        .gen-btn {
+            display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;
+            border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);
+            cursor: pointer; transition: 0.2s; font-size: 12px; font-weight: 700;
+        }
+        .gen-opt.hombre input:checked ~ .gen-btn {
+            border-color: #38bdf8; background: rgba(56, 189, 248, 0.18); color: #38bdf8; box-shadow: 0 0 12px rgba(56,189,248,0.25);
+        }
+        .gen-opt.mujer input:checked ~ .gen-btn {
+            border-color: #f472b6; background: rgba(244, 114, 182, 0.2); color: #f472b6; box-shadow: 0 0 12px rgba(244,114,182,0.3);
+        }
+
+        /* CASAS */
+        .houses-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 18px; }
+        @media (min-width: 500px) { .houses-grid { grid-template-columns: repeat(4, 1fr); } }
+        .house-opt input { display: none; }
+        .house-btn {
+            display: flex; flex-direction: column; align-items: center; padding: 9px 5px;
+            border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03); transition: 0.2s; text-align: center; cursor: pointer;
+        }
+        .house-btn span:first-child { font-size: 18px; margin-bottom: 2px; }
+        .house-btn span:last-child { font-size: 10px; font-weight: 700; text-transform: uppercase; }
+
+        .house-opt.slytherin input:checked ~ .house-btn { border-color: #34d399; background: rgba(16,185,129,0.18); color: #34d399; }
+        .house-opt.gryffindor input:checked ~ .house-btn { border-color: #f87171; background: rgba(239,68,68,0.18); color: #f87171; }
+        .house-opt.ravenclaw input:checked ~ .house-btn { border-color: #60a5fa; background: rgba(56,189,248,0.18); color: #60a5fa; }
+        .house-opt.hufflepuff input:checked ~ .house-btn { border-color: #facc15; background: rgba(234,179,8,0.18); color: #facc15; }
+
+        /* INPUTS */
+        .f-row { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 12px; }
+        @media (min-width: 600px) { .f-row.two-c { grid-template-columns: 1fr 1fr; } }
+        .input-group { display: flex; flex-direction: column; gap: 4px; }
+        .input-group label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--gold-l); }
+        .input-field {
+            width: 100%; background: rgba(7, 10, 16, 0.85); border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 8px; padding: 10px 12px; color: #fff; font-family: inherit; font-size: 13px;
+            outline: none; transition: 0.2s;
+        }
+        .input-field:focus { border-color: var(--house-b); box-shadow: 0 0 8px var(--house-glow); }
+
+        .photo-uploader {
+            display: flex; align-items: center; gap: 12px; padding: 10px;
+            background: rgba(0,0,0,0.3); border: 1px dashed var(--border-ornate); border-radius: 8px;
+        }
+        .photo-thumb { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; background: #000; }
+        .btn-subir {
+            background: rgba(212, 175, 55, 0.15); color: var(--gold-l); border: 1px solid var(--border-ornate);
+            padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+        }
+
+        .form-btns { display: flex; gap: 8px; margin-top: 18px; }
+        .btn-magic {
+            flex: 1; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-d) 100%);
+            border: 1px solid var(--gold-l); color: #070a0e; font-family: 'Cinzel', serif;
+            font-size: 13px; font-weight: 800; padding: 12px 18px; border-radius: 8px; cursor: pointer;
+            transition: 0.2s; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+        }
+        .btn-magic:hover { filter: brightness(1.1); transform: translateY(-1px); }
+        .btn-sec {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+            color: #cbd5e1; font-family: 'Cinzel', serif; font-size: 12px; padding: 12px 14px; border-radius: 8px; cursor: pointer;
+        }
+
+        /* CARNET */
+        .card-stage { display: flex; flex-direction: column; align-items: center; gap: 14px; position: sticky; top: 15px; }
+        .card-perspective { perspective: 1200px; width: 100%; max-width: 415px; }
+        .magic-card {
+            width: 100%; height: 285px; position: relative; transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .magic-card.flipped { transform: rotateY(180deg); }
+
+        .card-face {
+            position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 16px;
+            background: var(--house-grad); border: 2px solid var(--gold);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(212, 175, 55, 0.25);
+            padding: 13px 15px; backface-visibility: hidden; display: flex; flex-direction: column;
+            justify-content: space-between; overflow: hidden; transition: all 0.4s ease;
+        }
+
+        .magic-card.card-suspendida .card-front {
+            border-color: #ef4444 !important;
+            box-shadow: 0 18px 45px rgba(239, 68, 68, 0.5), inset 0 0 25px rgba(239, 68, 68, 0.3) !important;
+        }
+        .magic-card.card-suspendida .card-front::before {
+            content: 'SUSPENDIDA'; position: absolute; top: 40%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-family: 'Cinzel', serif; font-size: 38px; font-weight: 900;
+            color: rgba(239, 68, 68, 0.35); border: 4px solid rgba(239, 68, 68, 0.35);
+            padding: 4px 18px; border-radius: 10px; pointer-events: none; z-index: 5;
+            letter-spacing: 4px;
+        }
+
+        .magic-card.gen-hombre .card-front {
+            border-color: #60a5fa !important;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95), inset 0 0 20px rgba(56, 189, 248, 0.22) !important;
+        }
+        .magic-card.gen-hombre .card-front::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.35) 0%, rgba(2, 6, 23, 0.55) 100%);
+            pointer-events: none; border-radius: 14px;
+        }
+
+        .magic-card.gen-mujer .card-front {
+            border-color: #f472b6 !important;
+            box-shadow: 0 18px 40px rgba(236, 72, 153, 0.3), inset 0 0 20px rgba(244, 114, 182, 0.25) !important;
+        }
+        .magic-card.gen-mujer .card-front::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.18) 0%, rgba(168, 85, 247, 0.22) 50%, rgba(88, 28, 135, 0.3) 100%);
+            pointer-events: none; border-radius: 14px;
+        }
+
+        .card-face.card-back {
+            transform: rotateY(180deg); background: radial-gradient(circle at center, #131923 0%, #07090f 100%);
+            border: 2px solid var(--border-ornate); padding: 15px;
+        }
+
+        .guilloche {
+            position: absolute; inset: 0;
+            background-image: repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.03) 0px, rgba(212, 175, 55, 0.03) 2px, transparent 2px, transparent 6px);
+            pointer-events: none; z-index: 1;
+        }
+        .crest-bg { position: absolute; right: -20px; bottom: -30px; font-size: 170px; opacity: 0.06; pointer-events: none; user-select: none; color: #fff; z-index: 1; }
+
+        .card-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 5px; z-index: 2; }
+        .card-top-title h4 { font-family: 'Cinzel', serif; font-size: 11.5px; font-weight: 900; letter-spacing: 1.2px; color: var(--gold-l); }
+        .card-top-title span { font-size: 7.5px; letter-spacing: 0.8px; color: #cbd5e1; text-transform: uppercase; }
+        .mat-badge { background: rgba(0,0,0,0.65); border: 1px solid var(--gold); padding: 2px 7px; border-radius: 5px; font-family: monospace; font-size: 10.5px; font-weight: 700; color: var(--gold-l); }
+
+        .card-mid { display: flex; gap: 11px; align-items: center; z-index: 2; margin: 3px 0; }
+        .portrait-box { width: 80px; height: 108px; min-width: 80px; border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; background: #000; box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
+        .portrait-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .details-box { flex-grow: 1; display: flex; flex-direction: column; gap: 2px; overflow: hidden; }
+        .wizard-name-wrap { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 2px; margin-bottom: 1px; }
+        
+        .wizard-name {
+            font-family: 'Cinzel', serif; font-size: 13.5px; font-weight: 900; letter-spacing: 0.5px;
+            color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .gender-sym { font-size: 13px; font-weight: bold; }
+        .gen-h-sym { color: #60a5fa; }
+        .gen-m-sym { color: #f472b6; }
+
+        .d-line { font-size: 8.6px; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .d-line b { color: var(--gold-l); font-size: 7.8px; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px; }
+
+        .badge-vigencia {
+            display: inline-block; padding: 1px 5px; border-radius: 4px; font-size: 8px; font-weight: bold; text-transform: uppercase;
+        }
+        .badge-vigencia.vigente { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
+        .badge-vigencia.vencida { background: rgba(234, 179, 8, 0.2); color: #facc15; border: 1px solid #eab308; }
+        .badge-vigencia.suspendida { background: rgba(239, 68, 68, 0.3); color: #f87171; border: 1px solid #ef4444; }
+
+        .card-bot { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(212, 175, 55, 0.25); padding-top: 4px; z-index: 2; }
+        .sello-txt { font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; font-family: 'Cinzel', serif; color: var(--gold-l); }
+        .qr-box { width: 34px; height: 34px; background: #fff; padding: 2px; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+        .qr-box canvas { width: 100% !important; height: 100% !important; }
+
+        .back-body { height: 100%; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
+        .back-oath { font-family: 'Cinzel', serif; font-size: 8.8px; color: #cbd5e1; font-style: italic; line-height: 1.35; padding: 5px 7px; border: 1px dashed rgba(212, 175, 55, 0.25); border-radius: 8px; background: rgba(0,0,0,0.45); }
+        .signature-container { display: flex; flex-direction: column; align-items: center; }
+        .sig-name { font-family: 'Great Vibes', cursive; color: var(--gold-l); font-size: 26px; line-height: 1; text-shadow: 0 0 10px rgba(247, 226, 156, 0.5); }
+        .sig-role { font-size: 7.8px; text-transform: uppercase; letter-spacing: 0.8px; border-top: 1px solid var(--border-ornate); padding-top: 2px; color: #94a3b8; font-weight: 600; }
+
+        .card-actions-grid { width: 100%; max-width: 415px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+        .tool-btn {
+            background: rgba(212, 175, 55, 0.08); border: 1px solid var(--border-ornate);
+            color: #f8fafc; font-size: 11px; font-weight: 600; padding: 8px 10px; border-radius: 8px;
+            cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+        .tool-btn:hover { background: rgba(212, 175, 55, 0.2); color: var(--gold-l); border-color: var(--gold); }
+        .tool-btn.btn-hl { grid-column: span 2; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: 1px solid #34d399; color: #fff; }
+
+        .vault-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+        @media (min-width: 768px) { .vault-head { flex-direction: row; justify-content: space-between; align-items: center; } }
+        .search-wrap { position: relative; flex: 1; max-width: 360px; }
+        .search-wrap input { width: 100%; background: rgba(10, 14, 22, 0.9); border: 1px solid var(--border-ornate); border-radius: 8px; padding: 9px 12px 9px 34px; color: #fff; outline: none; font-size: 12px; }
+        .search-wrap span { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 13px; }
+        
+        .chips-list { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 2px; }
+        .chip { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 5px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+        .chip.active, .chip:hover { background: rgba(212, 175, 55, 0.15); color: #fff; border-color: var(--gold); }
+
+        .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 14px; }
+        .m-card { background: rgba(13, 17, 24, 0.85); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; position: relative; }
+        .m-card.card-border-suspendida { border-color: #ef4444 !important; box-shadow: 0 0 15px rgba(239, 68, 68, 0.2); }
+        .m-card-top { display: flex; gap: 10px; align-items: center; }
+        .m-thumb { width: 44px; height: 44px; min-width: 44px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; background: #000; }
+        .m-meta h4 { font-family: 'Cinzel', serif; font-size: 13.5px; color: #fff; display: flex; align-items: center; gap: 5px; }
+        .m-meta span { font-size: 10px; font-weight: 700; }
+        .m-pills { font-size: 10px; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 6px 8px; border-radius: 6px; display: flex; flex-direction: column; gap: 2.5px; }
+        .m-actions { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+        .m-btn { flex: 1; min-width: 70px; padding: 6px 4px; font-size: 10px; font-weight: 600; border-radius: 6px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #e2e8f0; text-align: center; }
+        .m-btn:hover { background: rgba(212,175,55,0.2); border-color: var(--gold); color: #fff; }
+        .m-btn.sancion { background: rgba(234, 179, 8, 0.15); border-color: #facc15; color: #fde047; }
+        .m-btn.rehabilitar { background: rgba(16, 185, 129, 0.2); border-color: #34d399; color: #6ee7b7; flex: 2; }
+        .m-btn.del { background: rgba(220, 38, 38, 0.15); border-color: #ef4444; color: #f87171; flex: 0.5; }
+
+        .kpi-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 18px; }
+        @media (min-width: 768px) { .kpi-row { grid-template-columns: repeat(4, 1fr); } }
+        .kpi-box { background: rgba(13, 17, 24, 0.9); border: 1px solid var(--border-ornate); border-radius: 10px; padding: 14px 10px; text-align: center; }
+        .kpi-val { font-family: 'Cinzel', serif; font-size: 24px; font-weight: 900; color: var(--gold-l); margin: 3px 0; }
+        .kpi-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+
+        .progress-block { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+        .p-row { display: flex; flex-direction: column; gap: 4px; }
+        .p-info { display: flex; justify-content: space-between; font-size: 11.5px; font-weight: 600; }
+        .p-bar { height: 8px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; }
+        .p-fill { height: 100%; border-radius: 6px; transition: width 0.8s ease; }
+
+        .toast {
+            position: fixed; bottom: 20px; right: 20px; background: #0f172a; border: 1px solid var(--gold);
+            color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 12px; font-weight: 600;
+            display: flex; align-items: center; gap: 8px; transform: translateY(100px); opacity: 0;
+            transition: 0.3s; z-index: 9999; box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 14px; }
+        .modal-card { background: #0f172a; border: 2px solid var(--gold); border-radius: 14px; padding: 20px; width: 100%; max-width: 360px; text-align: center; }
+
+        @media print {
+            body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+            header, nav, .glass-box, .card-actions-grid, .kpi-row, .vault-head { display: none !important; }
+            .card-stage { position: static !important; }
+            .magic-card { box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="theme-slytherin">
+
+    <header>
+        <div class="top-bar">
+            <div class="badge-ministerio">
+                <span class="dot-pulse"></span>
+                Ministerio Diamante • Hogwarts Orión
+            </div>
+            <button id="btn-admin-toggle" class="btn-director" onclick="toggleModoDirector()">
+                <span>🗝️</span> <span id="txt-modo-dir">Modo Director</span>
+            </button>
+        </div>
+        <h1 class="titulo">Registro Mágico <span>Oficial</span></h1>
+        <div class="sub-titulo">Departamento de Cédulas y Censo Mágico</div>
+    </header>
+
+    <nav class="nav-tabs">
+        <button class="nav-btn active" onclick="cambiarSeccion('sec-registro', this)">
+            <span>📜</span> Expedición de Cédula
+        </button>
+        <button class="nav-btn" onclick="cambiarSeccion('sec-padron', this)">
+            <span>🏛️</span> Bóveda y Padrón (<span id="cont-nav">0</span>)
+        </button>
+        <button class="nav-btn" onclick="cambiarSeccion('sec-censo', this)">
+            <span>📊</span> Censo & Estadísticas
+        </button>
+    </nav>
+
+    <main>
+
+        <section id="sec-registro" class="view-section active-view">
+            
+            <div id="banner-ip-bloqueo" class="banner-bloqueo"></div>
+
+            <div class="workspace">
+                
+                <div class="glass-box" id="caja-formulario">
+                    <div class="panel-head">
+                        <span id="form-titulo">Formulario de Afiliación</span>
+                        <span id="badge-edit" style="display:none; font-size:10px; color:#38bdf8; background:rgba(56,189,248,0.12); padding:2px 7px; border-radius:5px; border:1px solid #38bdf8;">MODO EDICIÓN</span>
+                    </div>
+
+                    <!-- GÉNERO -->
+                    <div class="input-group" style="margin-bottom:14px;">
+                        <label>Identidad Mágica (Género) *</label>
+                        <div class="genero-selector-grid">
+                            <label class="gen-opt hombre">
+                                <input type="radio" name="r-gen" value="Hombre" checked onchange="alCambiarGenero('Hombre')">
+                                <div class="gen-btn"><span>♂</span><span>Mago (Hombre)</span></div>
+                            </label>
+                            <label class="gen-opt mujer">
+                                <input type="radio" name="r-gen" value="Mujer" onchange="alCambiarGenero('Mujer')">
+                                <div class="gen-btn"><span>♀</span><span>Bruja (Mujer)</span></div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- CASAS -->
+                    <div class="houses-grid">
+                        <label class="house-opt slytherin">
+                            <input type="radio" name="r-casa" value="Slytherin" checked onchange="alCambiarCasa(this.value)">
+                            <div class="house-btn"><span>🐍</span><span>Slytherin</span></div>
+                        </label>
+                        <label class="house-opt gryffindor">
+                            <input type="radio" name="r-casa" value="Gryffindor" onchange="alCambiarCasa(this.value)">
+                            <div class="house-btn"><span>🦁</span><span>Gryffindor</span></div>
+                        </label>
+                        <label class="house-opt ravenclaw">
+                            <input type="radio" name="r-casa" value="Ravenclaw" onchange="alCambiarCasa(this.value)">
+                            <div class="house-btn"><span>🦅</span><span>Ravenclaw</span></div>
+                        </label>
+                        <label class="house-opt hufflepuff">
+                            <input type="radio" name="r-casa" value="Hufflepuff" onchange="alCambiarCasa(this.value)">
+                            <div class="house-btn"><span>🦡</span><span>Hufflepuff</span></div>
+                        </label>
+                    </div>
+
+                    <form id="form-magico" onsubmit="event.preventDefault(); guardarRegistro();">
+                        <input type="hidden" id="edit-id" value="">
+                        <input type="hidden" id="edit-emision-ts" value="">
+                        <input type="hidden" id="edit-vence-ts" value="">
+                        <input type="hidden" id="edit-infracciones" value="0">
+                        <input type="hidden" id="edit-suspension-ts" value="">
+
+                        <div class="f-row">
+                            <div class="input-group">
+                                <label>Mago / Bruja (Nombre o Nick de WhatsApp) *</label>
+                                <input type="text" id="in-nombre" class="input-field" placeholder="Ej: @Jere" required oninput="actualizarCard()">
+                            </div>
+                        </div>
+
+                        <div class="f-row two-c">
+                            <div class="input-group">
+                                <label>Rango / Empleo en Orión *</label>
+                                <input type="text" id="in-empleo" class="input-field" placeholder="Ej: Director de Hogwarts Orion" required oninput="actualizarCard()">
+                            </div>
+                            <div class="input-group">
+                                <label>Estado de Sangre / Bando *</label>
+                                <input type="text" id="in-bando" class="input-field" placeholder="Ej: Mestiza / Sangre Pura" required oninput="actualizarCard()">
+                            </div>
+                        </div>
+
+                        <div class="f-row two-c">
+                            <div class="input-group">
+                                <label>Varita Mágica *</label>
+                                <input type="text" id="in-varita" class="input-field" placeholder="Ej: 15 pulgadas, madera de saúco, thestral" required oninput="actualizarCard()">
+                            </div>
+                            <div class="input-group">
+                                <label>Patronus Mágico *</label>
+                                <input type="text" id="in-patronus" class="input-field" placeholder="Ej: Gigante" required oninput="actualizarCard()">
+                            </div>
+                        </div>
+
+                        <div class="f-row">
+                            <div class="input-group">
+                                <label>Emoji Distintivo (Bóveda de Gringotts) *</label>
+                                <input type="text" id="in-emoji" class="input-field" placeholder="Ej: 🌹🖤" required oninput="actualizarCard()">
+                            </div>
+                        </div>
+
+                        <div class="f-row">
+                            <div class="input-group">
+                                <label>Retrato Oficial (Comprimido automáticamente)</label>
+                                <div class="photo-uploader">
+                                    <img id="form-foto-thumb" class="photo-thumb" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Avatar">
+                                    <div style="display:flex; flex-direction:column; gap:4px;">
+                                        <label class="btn-subir">
+                                            <span>📷</span> Cargar Foto
+                                            <input type="file" id="in-foto-file" accept="image/*" style="display:none" onchange="procesarFoto(event)">
+                                        </label>
+                                        <button type="button" style="background:none; border:none; color:#ef4444; font-size:10.5px; cursor:pointer; text-align:left;" onclick="restaurarFoto()">Restaurar foto por defecto</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-btns">
+                            <button type="submit" class="btn-magic" id="btn-submit">
+                                <span>✨</span> Guardar en Bóveda Firebase
+                            </button>
+                            <button type="button" class="btn-sec" id="btn-cancel" onclick="limpiarForm()" style="display:none;">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- CARNET PREVIEW -->
+                <div class="card-stage">
+                    <div class="card-perspective">
+                        <div id="nodo-carnet" class="magic-card gen-hombre">
+                            
+                            <!-- ANVERSO -->
+                            <div class="card-face card-front">
+                                <div class="guilloche"></div>
+                                <div class="crest-bg" id="card-crest">🐍</div>
+
+                                <div class="card-top">
+                                    <div class="card-top-title">
+                                        <h4>HOGWARTS ORIÓN</h4>
+                                        <span>Ministerio Diamante • Cédula</span>
+                                    </div>
+                                    <div class="mat-badge" id="card-mat">HO-SLY-2026</div>
+                                </div>
+
+                                <div class="card-mid">
+                                    <div class="portrait-box">
+                                        <img id="card-foto" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Retrato">
+                                    </div>
+                                    <div class="details-box">
+                                        <div class="wizard-name-wrap">
+                                            <div class="wizard-name" id="card-nom">@Mago</div>
+                                            <span id="card-gender-icon" class="gender-sym gen-h-sym">♂</span>
+                                        </div>
+                                        <div class="d-line"><b>Casa:</b> <span id="card-cs">💚 Slytherin</span></div>
+                                        <div class="d-line"><b>Rango:</b> <span id="card-emp">Alumno</span></div>
+                                        <div class="d-line"><b>Varita:</b> <span id="card-var">Vid y Fénix</span></div>
+                                        <div class="d-line"><b>Patronus:</b> <span id="card-pat">Gigante</span></div>
+                                        <div class="d-line"><b>Bóveda:</b> <span id="card-emj">🌹🖤</span></div>
+                                        <div class="d-line"><b>Bando:</b> <span id="card-ban">Sangre Pura</span></div>
+                                        <div class="d-line">
+                                            <b>Estado:</b> 
+                                            <span id="card-badge-estado" class="badge-vigencia vigente">VIGENTE</span>
+                                            <span id="card-vence-txt" style="font-size:7.8px; color:#cbd5e1; margin-left:3px;">(Vence: --/--/--)</span>
+                                        </div>
+                                        <div class="d-line" id="card-linea-multa" style="display:none; color:#f87171;">
+                                            <b>Multa:</b> <span id="card-multa-txt" style="font-weight:bold;">100.000 G</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-bot">
+                                    <div class="sello-txt">💎 AUTENTICIDAD ORIÓN</div>
+                                    <div class="qr-box">
+                                        <canvas id="qr-canvas"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- REVERSO -->
+                            <div class="card-face card-back">
+                                <div class="guilloche"></div>
+                                <div class="back-body">
+                                    <div class="card-top-title">
+                                        <h4 style="font-size:11px;">CONSEJO SUPREMO DE HOGWARTS ORIÓN</h4>
+                                        <span>Código de Honor y Lealtad</span>
+                                    </div>
+                                    
+                                    <p class="back-oath">
+                                        «El portador de esta credencial queda reconocido bajo la soberanía del Ministerio Diamante, facultado para portar varita y transitar por las dependencias de Hogwarts Orión.»
+                                    </p>
+
+                                    <div style="display:flex; justify-content:space-around; font-size:8.5px; color:#cbd5e1; background:rgba(0,0,0,0.4); padding:4px 6px; border-radius:6px;">
+                                        <div><b>Emisión:</b> <span id="card-back-emision">--/--/--</span></div>
+                                        <div><b>Vence (3M):</b> <span id="card-back-vence">--/--/--</span></div>
+                                        <div><b>Estado:</b> <span id="card-back-estado" style="color:#10b981; font-weight:bold;">VIGENTE</span></div>
+                                    </div>
+
+                                    <div class="signature-container">
+                                        <div class="sig-name">Jeremias Snape</div>
+                                        <div class="sig-role">Director de Hogwarts Orión • Ministerio Diamante</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- BOTONES -->
+                    <div class="card-actions-grid">
+                        <button class="tool-btn" onclick="voltearCarnet()"><span>🔄</span> Voltear Cédula</button>
+                        <button class="tool-btn" onclick="imprimirCarnet()"><span>🖨️</span> Imprimir</button>
+                        <button class="tool-btn btn-hl" onclick="descargarPNG()"><span>📸</span> Descargar Cédula (PNG)</button>
+                        <button class="tool-btn" onclick="copiarWhatsApp()"><span>📋</span> Copiar Ficha WhatsApp</button>
+                        <button class="tool-btn" onclick="abrirModalQR()"><span>🔍</span> Validar QR</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: BÓVEDA -->
+        <section id="sec-padron" class="view-section">
+            <div class="glass-box">
+                <div class="panel-head">
+                    <span>Padrón de Magos Registrados (En vivo)</span>
+                    <button class="tool-btn" style="padding:4px 10px;" onclick="cargarDeFirebase(true)">🔄 Recargar</button>
+                </div>
+
+                <div class="vault-head">
+                    <div class="search-wrap">
+                        <span>🔍</span>
+                        <input type="text" id="buscador" placeholder="Buscar por Nombre, Matrícula..." oninput="filtrarPadron()">
+                    </div>
+                    <div class="chips-list">
+                        <div class="chip active" onclick="filtrarCasa('TODAS', this)">Todas</div>
+                        <div class="chip" onclick="filtrarCasa('Slytherin', this)">💚 Slytherin</div>
+                        <div class="chip" onclick="filtrarCasa('Gryffindor', this)">❤️ Gryffindor</div>
+                        <div class="chip" onclick="filtrarCasa('Ravenclaw', this)">💙 Ravenclaw</div>
+                        <div class="chip" onclick="filtrarCasa('Hufflepuff', this)">💛 Hufflepuff</div>
+                    </div>
+                </div>
+
+                <div id="grid-padron" class="members-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: CENSO -->
+        <section id="sec-censo" class="view-section">
+            <div class="kpi-row">
+                <div class="kpi-box">
+                    <div class="kpi-lbl">Total Registrados</div>
+                    <div class="kpi-val" id="kpi-tot">0</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-lbl">Cédulas Vigentes</div>
+                    <div class="kpi-val" id="kpi-vig" style="color:#10b981;">0</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-lbl">Suspendidos (3 Faltas)</div>
+                    <div class="kpi-val" id="kpi-sus" style="color:#f87171;">0</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-lbl">Multa Diaria Base</div>
+                    <div class="kpi-val" style="color:var(--gold-l); font-size:16px; margin:7px 0;">100.000 G 🪙</div>
+                </div>
+            </div>
+
+            <div class="glass-box">
+                <div class="panel-head"><span>Censo Poblacional por Casas</span></div>
+                <div class="progress-block">
+                    <div class="p-row">
+                        <div class="p-info"><span style="color:#34d399;">🐍 Slytherin</span><span id="lb-sly">0 (0%)</span></div>
+                        <div class="p-bar"><div class="p-fill" id="pb-sly" style="width:0%; background:#10b981;"></div></div>
+                    </div>
+                    <div class="p-row">
+                        <div class="p-info"><span style="color:#f87171;">🦁 Gryffindor</span><span id="lb-gry">0 (0%)</span></div>
+                        <div class="p-bar"><div class="p-fill" id="pb-gry" style="width:0%; background:#ef4444;"></div></div>
+                    </div>
+                    <div class="p-row">
+                        <div class="p-info"><span style="color:#60a5fa;">🦅 Ravenclaw</span><span id="lb-rav">0 (0%)</span></div>
+                        <div class="p-bar"><div class="p-fill" id="pb-rav" style="width:0%; background:#38bdf8;"></div></div>
+                    </div>
+                    <div class="p-row">
+                        <div class="p-info"><span style="color:#facc15;">🦡 Hufflepuff</span><span id="lb-huf">0 (0%)</span></div>
+                        <div class="p-bar"><div class="p-fill" id="pb-huf" style="width:0%; background:#eab308;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast">
+        <span id="t-ico">✨</span>
+        <span id="t-msg">Operación completada</span>
+    </div>
+
+    <!-- MODAL QR -->
+    <div id="modal-qr" class="modal-bg" onclick="cerrarModalQR()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <h3 style="font-family:'Cinzel', serif; color:var(--gold-l); margin-bottom:8px;">Validación de Cédula</h3>
+            <p style="font-size:10px; color:#94a3b8; margin-bottom:12px;">Escanea este código con tu teléfono para abrir el documento oficial</p>
+            
+            <div style="background:#fff; padding:8px; border-radius:8px; display:inline-block; margin-bottom:12px;">
+                <canvas id="qr-modal-canvas"></canvas>
+            </div>
+            
+            <div id="qr-desc" style="font-size:11px; color:#cbd5e1; margin-bottom:12px; line-height:1.4;"></div>
+            
+            <div style="background:rgba(0,0,0,0.5); padding:8px; border-radius:6px; border:1px solid rgba(212,175,55,0.25); margin-bottom:14px;">
+                <div style="font-size:9px; color:#94a3b8; margin-bottom:3px;">ENLACE DIRECTO AL DOCUMENTO:</div>
+                <input type="text" id="qr-link-input" readonly style="width:100%; background:transparent; border:none; color:#38bdf8; font-size:10.5px; text-align:center; outline:none; font-family:monospace;" onclick="this.select()">
+            </div>
+
+            <div style="display:flex; gap:6px;">
+                <button class="tool-btn" style="flex:1;" onclick="copiarEnlaceQR()">📋 Copiar Enlace</button>
+                <button class="tool-btn btn-hl" style="flex:1;" onclick="cerrarModalQR()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const FIREBASE_DB = "https://registro-civil-ae7c4-default-rtdb.firebaseio.com/registro_magico";
+        const CLAVE_DIRECTOR = "Snape2026";
+        const FOTO_DEFAULT = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80";
+        const MS_TRES_MESES = 90 * 24 * 60 * 60 * 1000;
+        const MS_DIA = 24 * 60 * 60 * 1000;
+
+        let padronMagico = [];
+        let casaFiltro = 'TODAS';
+        let matActiva = '';
+        let fotoDataURL = FOTO_DEFAULT;
+        let qrInstancia = null;
+        let esModoDirector = false;
+        let miIPPublica = "";
+
+        let emisionActualTS = Date.now();
+        let venceActualTS = emisionActualTS + MS_TRES_MESES;
+        let infraccionesActual = 0;
+        let suspensionActualTS = null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            generarMatricula();
+            alCambiarGenero('Hombre');
+            iniciarQR();
+            obtenerIP();
+        });
+
+        function obtenerURLExterna(matricula) {
+            const urlBase = window.location.href.split('?')[0];
+            return `${urlBase}?mat=${matricula}`;
+        }
+
+        function formatearFecha(ms) {
+            if (!ms) return "--/--/--";
+            const d = new Date(ms);
+            const dia = String(d.getDate()).padStart(2, '0');
+            const mes = String(d.getMonth() + 1).padStart(2, '0');
+            const anio = d.getFullYear();
+            return `${dia}/${mes}/${anio}`;
+        }
+
+        function esVencida(venceTS) {
+            if (!venceTS) return false;
+            return Date.now() > venceTS;
+        }
+
+        function calcularMulta(suspensionTS) {
+            if (!suspensionTS) return 100000;
+            const diasTranscurridos = Math.floor((Date.now() - suspensionTS) / MS_DIA);
+            const dias = Math.max(0, diasTranscurridos);
+            return 100000 + (dias * 100000);
+        }
+
+        function obtenerIP() {
+            fetch('https://api.ipify.org?format=json')
+                .then(r => r.json())
+                .then(data => {
+                    miIPPublica = data.ip;
+                    cargarDeFirebase();
+                })
+                .catch(() => {
+                    miIPPublica = "IP-LOCAL-" + (localStorage.getItem("HO_UUID") || Math.random().toString(36).substr(2, 9));
+                    localStorage.setItem("HO_UUID", miIPPublica);
+                    cargarDeFirebase();
+                });
+        }
+
+        function getGenero() {
+            const rad = document.querySelector('input[name="r-gen"]:checked');
+            return rad ? rad.value : 'Hombre';
+        }
+
+        function alCambiarGenero(genero) {
+            const carnet = document.getElementById('nodo-carnet');
+            const sym = document.getElementById('card-gender-icon');
+
+            if (genero === "Mujer") {
+                carnet.classList.remove('gen-hombre');
+                carnet.classList.add('gen-mujer');
+                sym.innerText = "♀";
+                sym.className = "gender-sym gen-m-sym";
+            } else {
+                carnet.classList.remove('gen-mujer');
+                carnet.classList.add('gen-hombre');
+                sym.innerText = "♂";
+                sym.className = "gender-sym gen-h-sym";
+            }
+            actualizarCard();
+        }
+
+        function toggleModoDirector() {
+            if (esModoDirector) {
+                esModoDirector = false;
+                document.getElementById('btn-admin-toggle').classList.remove('active');
+                document.getElementById('txt-modo-dir').innerText = "Modo Director";
+                mostrarToast("Modo Alumno restablecido", "🔒");
+            } else {
+                const pass = prompt("🗝️ Ingrese la Clave Maestra del Director Jeremías Snape:");
+                if (pass === CLAVE_DIRECTOR) {
+                    esModoDirector = true;
+                    document.getElementById('btn-admin-toggle').classList.add('active');
+                    document.getElementById('txt-modo-dir').innerText = "Director Activo ✅";
+                    mostrarToast("¡Bienvenido Director Jeremías Snape!", "👑");
+                } else if (pass !== null) {
+                    alert("⚠️ Clave incorrecta. Acceso restringido.");
+                }
+            }
+            evaluarPermisoCreacion();
+            renderizarPadron();
+        }
+
+        function evaluarPermisoCreacion() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('mat')) return;
+
+            const banner = document.getElementById('banner-ip-bloqueo');
+            const cajaForm = document.getElementById('caja-formulario');
+
+            if (esModoDirector) {
+                banner.style.display = "none";
+                cajaForm.style.opacity = "1";
+                cajaForm.style.pointerEvents = "auto";
+                return;
+            }
+
+            const miMatriculaGuardada = localStorage.getItem("HO_MI_CEDULA_MAT");
+            const yaRegistrado = padronMagico.find(m => m.ip === miIPPublica || (miMatriculaGuardada && m.matricula === miMatriculaGuardada));
+
+            if (yaRegistrado) {
+                const suspendido = (yaRegistrado.infracciones || 0) >= 3;
+                const vencida = esVencida(yaRegistrado.fechaVence);
+
+                if (suspendido) {
+                    const multa = calcularMulta(yaRegistrado.fechaSuspension);
+                    banner.style.display = "block";
+                    banner.style.background = "rgba(220, 38, 38, 0.25)";
+                    banner.style.borderColor = "#ef4444";
+                    banner.style.color = "#fecaca";
+                    banner.innerHTML = `
+                        ⛔ <b>DOCUMENTO SUSPENDIDO POR EL MINISTERIO DIAMANTE</b><br>
+                        Has acumulado <b>${yaRegistrado.infracciones}/3 infracciones disciplinarias</b>.<br>
+                        💰 <b>Multa de reposición al día de hoy:</b> <span style="font-size:14px; font-weight:bold; color:#facc15;">${multa.toLocaleString()} Galeones</span>.<br>
+                        <i>(Inició en 100.000 Galeones y aumenta 100.000 Galeones por cada día de mora).</i><br>
+                        Para rehabilitar tu cédula, abona los galeones en Gringotts y presenta el comprobante al <b>Director Jeremías Snape</b>.
+                    `;
+                    cajaForm.style.opacity = "0.4";
+                    cajaForm.style.pointerEvents = "none";
+                } else if (vencida) {
+                    banner.style.display = "block";
+                    banner.style.background = "rgba(239, 68, 68, 0.2)";
+                    banner.style.borderColor = "#ef4444";
+                    banner.style.color = "#fecaca";
+                    banner.innerHTML = `
+                        ⚠️ <b>Cédula Caducada:</b> Tu Cédula Oficial (<b>${yaRegistrado.matricula}</b>) ha cumplido sus 3 meses de vigencia.<br>
+                        <button type="button" class="btn-magic" style="margin-top:8px; padding:6px 14px; font-size:11px;" onclick="iniciarRenovacion('${yaRegistrado.fbKey}')">
+                            🔄 Tramitar Renovación Oficial por 3 Meses
+                        </button>
+                    `;
+                    cajaForm.style.opacity = "0.5";
+                    cajaForm.style.pointerEvents = "none";
+                } else {
+                    banner.style.display = "block";
+                    banner.style.background = "rgba(234, 179, 8, 0.15)";
+                    banner.style.borderColor = "#facc15";
+                    banner.style.color = "#fef08a";
+                    banner.innerHTML = `
+                        ⚠️ <b>Acceso Restringido:</b> Ya posees una Cédula Oficial vigente (${yaRegistrado.matricula} — ${yaRegistrado.nombre}).<br>
+                        Válida hasta el <b>${formatearFecha(yaRegistrado.fechaVence)}</b>. Faltas acumuladas: <b>${yaRegistrado.infracciones || 0}/3</b>.
+                    `;
+                    cajaForm.style.opacity = "0.45";
+                    cajaForm.style.pointerEvents = "none";
+                }
+                verCredencialDirecta(yaRegistrado.fbKey, false);
+            } else {
+                banner.style.display = "none";
+                cajaForm.style.opacity = "1";
+                cajaForm.style.pointerEvents = "auto";
+            }
+        }
+
+        function iniciarRenovacion(fbKey) {
+            const m = padronMagico.find(x => x.fbKey === fbKey);
+            if (!m) return;
+
+            const cajaForm = document.getElementById('caja-formulario');
+            cajaForm.style.opacity = "1";
+            cajaForm.style.pointerEvents = "auto";
+
+            document.getElementById('edit-id').value = m.fbKey;
+            document.getElementById('in-nombre').value = m.nombre;
+            document.getElementById('in-empleo').value = m.empleo;
+            document.getElementById('in-bando').value = m.bando;
+            document.getElementById('in-varita').value = m.varita;
+            document.getElementById('in-patronus').value = m.patronus || "";
+            document.getElementById('in-emoji').value = m.emojiBoveda || m.mascota || "";
+
+            emisionActualTS = Date.now();
+            venceActualTS = emisionActualTS + MS_TRES_MESES;
+            document.getElementById('edit-emision-ts').value = emisionActualTS;
+            document.getElementById('edit-vence-ts').value = venceActualTS;
+            document.getElementById('edit-infracciones').value = m.infracciones || 0;
+            document.getElementById('edit-suspension-ts').value = m.fechaSuspension || "";
+
+            const gen = m.genero || 'Hombre';
+            const radGen = document.querySelector(`input[name="r-gen"][value="${gen}"]`);
+            if (radGen) { radGen.checked = true; alCambiarGenero(gen); }
+
+            const rad = document.querySelector(`input[name="r-casa"][value="${m.casa}"]`);
+            if (rad) { rad.checked = true; alCambiarCasa(m.casa); }
+
+            matActiva = m.matricula;
+            document.getElementById('card-mat').innerText = matActiva;
+
+            fotoDataURL = m.foto || FOTO_DEFAULT;
+            document.getElementById('form-foto-thumb').src = fotoDataURL;
+            document.getElementById('card-foto').src = fotoDataURL;
+
+            document.getElementById('badge-edit').style.display = "inline-block";
+            document.getElementById('badge-edit').innerText = "RENOVACIÓN";
+            document.getElementById('btn-cancel').style.display = "inline-block";
+            document.getElementById('btn-submit').innerHTML = `<span>🔄</span> Renovar por 3 Meses`;
+            document.getElementById('form-titulo').innerText = `Renovando Cédula ${m.matricula}`;
+
+            actualizarCard();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+            mostrarToast("Formulario listo para renovar vigencia", "🔄");
+        }
+
+        function getCasa() {
+            const rad = document.querySelector('input[name="r-casa"]:checked');
+            return rad ? rad.value : 'Slytherin';
+        }
+
+        function alCambiarCasa(casa) {
+            document.body.className = `theme-${casa.toLowerCase()}`;
+            const crests = { 'Slytherin': '🐍', 'Gryffindor': '🦁', 'Ravenclaw': '🦅', 'Hufflepuff': '🦡' };
+            document.getElementById('card-crest').innerText = crests[casa] || '✨';
+
+            if (!document.getElementById('edit-id').value) {
+                generarMatricula();
+            }
+            actualizarCard();
+        }
+
+        function generarMatricula() {
+            const c = getCasa();
+            const codigos = { 'Slytherin':'SLY', 'Gryffindor':'GRY', 'Ravenclaw':'RAV', 'Hufflepuff':'HUF' };
+            const aleat = Math.floor(1000 + Math.random() * 9000);
+            matActiva = `HO-${codigos[c] || 'HO'}-${aleat}`;
+            document.getElementById('card-mat').innerText = matActiva;
+            regenerarQR();
+        }
+
+        function actualizarCard() {
+            const valNombre = document.getElementById('in-nombre').value.trim();
+            const genero = getGenero();
+            const placeholderDef = (genero === "Mujer") ? "@Bruja" : "@Mago";
+            const nom = valNombre || placeholderDef;
+
+            const emp = document.getElementById('in-empleo').value.trim() || "Alumno";
+            const ban = document.getElementById('in-bando').value.trim() || "Sangre Pura";
+            const varita = document.getElementById('in-varita').value.trim() || "Vid y Fénix";
+            const patronus = document.getElementById('in-patronus').value.trim() || "Gigante";
+            const emojiBoveda = document.getElementById('in-emoji').value.trim() || "🌹🖤";
+            const casa = getCasa();
+
+            const emojis = { 'Slytherin': '💚', 'Gryffindor': '❤️', 'Ravenclaw': '💙', 'Hufflepuff': '💛' };
+
+            document.getElementById('card-nom').innerText = nom;
+            document.getElementById('card-cs').innerText = `${emojis[casa] || ''} ${casa}`;
+            document.getElementById('card-emp').innerText = emp;
+            document.getElementById('card-ban').innerText = ban;
+            document.getElementById('card-var').innerText = varita;
+            document.getElementById('card-pat').innerText = patronus;
+            document.getElementById('card-emj').innerText = emojiBoveda;
+            document.getElementById('card-foto').src = fotoDataURL;
+
+            const carnetNodo = document.getElementById('nodo-carnet');
+            const badgeEstado = document.getElementById('card-badge-estado');
+            const txtVence = document.getElementById('card-vence-txt');
+            const backEstado = document.getElementById('card-back-estado');
+            const lineaMulta = document.getElementById('card-linea-multa');
+            const multaTxt = document.getElementById('card-multa-txt');
+
+            const esSuspendida = infraccionesActual >= 3;
+            const vencida = esVencida(venceActualTS);
+
+            if (esSuspendida) {
+                carnetNodo.classList.add('card-suspendida');
+                badgeEstado.className = "badge-vigencia suspendida";
+                badgeEstado.innerText = "SUSPENDIDA";
+                txtVence.innerText = "(3/3 Faltas)";
+                backEstado.innerText = "SUSPENDIDA";
+                backEstado.style.color = "#ef4444";
+                
+                const montoMulta = calcularMulta(suspensionActualTS);
+                lineaMulta.style.display = "block";
+                multaTxt.innerText = `${montoMulta.toLocaleString()} Galeones`;
+            } else {
+                carnetNodo.classList.remove('card-suspendida');
+                lineaMulta.style.display = "none";
+
+                if (vencida) {
+                    badgeEstado.className = "badge-vigencia vencida";
+                    badgeEstado.innerText = "CADUCADA";
+                    txtVence.innerText = `(Venció: ${formatearFecha(venceActualTS)})`;
+                    backEstado.innerText = "CADUCADA";
+                    backEstado.style.color = "#facc15";
+                } else {
+                    badgeEstado.className = "badge-vigencia vigente";
+                    badgeEstado.innerText = "VIGENTE";
+                    txtVence.innerText = `(Vence: ${formatearFecha(venceActualTS)})`;
+                    backEstado.innerText = "VIGENTE";
+                    backEstado.style.color = "#10b981";
+                }
+            }
+
+            document.getElementById('card-back-emision').innerText = formatearFecha(emisionActualTS);
+            document.getElementById('card-back-vence').innerText = formatearFecha(venceActualTS);
+
+            regenerarQR();
+        }
+
+        function procesarFoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 220;
+                    const scale = MAX_WIDTH / img.width;
+                    canvas.width = MAX_WIDTH;
+                    canvas.height = img.height * scale;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    fotoDataURL = canvas.toDataURL('image/jpeg', 0.82);
+                    document.getElementById('form-foto-thumb').src = fotoDataURL;
+                    document.getElementById('card-foto').src = fotoDataURL;
+                    mostrarToast("Retrato optimizado", "📷");
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function restaurarFoto() {
+            fotoDataURL = FOTO_DEFAULT;
+            document.getElementById('form-foto-thumb').src = FOTO_DEFAULT;
+            document.getElementById('card-foto').src = FOTO_DEFAULT;
+            document.getElementById('in-foto-file').value = "";
+            mostrarToast("Retrato por defecto restaurado", "🔄");
+        }
+
+        function iniciarQR() {
+            qrInstancia = new QRious({ element: document.getElementById('qr-canvas'), size: 75, level: 'M' });
+            regenerarQR();
+        }
+
+        function regenerarQR() {
+            if (!qrInstancia) return;
+            const linkReal = obtenerURLExterna(matActiva);
+            qrInstancia.value = linkReal;
+        }
+
+        function voltearCarnet() {
+            document.getElementById('nodo-carnet').classList.toggle('flipped');
+        }
+
+        function cargarDeFirebase(manual = false) {
+            if (manual) mostrarToast("Consultando Bóveda...", "☁️");
+
+            fetch(`${FIREBASE_DB}.json`)
+                .then(res => res.json())
+                .then(data => {
+                    padronMagico = [];
+                    if (data) {
+                        Object.keys(data).forEach(key => {
+                            padronMagico.push({ fbKey: key, ...data[key] });
+                        });
+                        padronMagico.reverse();
+                    }
+                    localStorage.setItem("HO_PADRON_LOCAL", JSON.stringify(padronMagico));
+                    renderizarPadron();
+                    actualizarEstadisticas();
+                    verificarEscaneoQR();
+                    evaluarPermisoCreacion();
+                    if (manual) mostrarToast("Bóveda actualizada", "✅");
+                })
+                .catch(() => {
+                    const local = localStorage.getItem("HO_PADRON_LOCAL");
+                    if (local) padronMagico = JSON.parse(local);
+                    renderizarPadron();
+                    actualizarEstadisticas();
+                    verificarEscaneoQR();
+                    evaluarPermisoCreacion();
+                });
+        }
+
+        function verificarEscaneoQR() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const matEscaneada = urlParams.get('mat');
+
+            if (matEscaneada && padronMagico.length > 0) {
+                const encontrado = padronMagico.find(x => x.matricula.toLowerCase() === matEscaneada.toLowerCase());
+                if (encontrado) {
+                    verCredencialDirecta(encontrado.fbKey, true);
+                    mostrarToast(`Cédula Oficial de ${encontrado.nombre} verificada`, "🪪");
+                } else {
+                    alert(`⚠️ La matrícula ${matEscaneada} no figura en el Registro Oficial.`);
+                }
+            }
+        }
+
+        function guardarRegistro() {
+            const nom = document.getElementById('in-nombre').value.trim();
+            const emp = document.getElementById('in-empleo').value.trim();
+            const ban = document.getElementById('in-bando').value.trim();
+            const varita = document.getElementById('in-varita').value.trim();
+            const patronus = document.getElementById('in-patronus').value.trim();
+            const emojiBoveda = document.getElementById('in-emoji').value.trim();
+            const casa = getCasa();
+            const genero = getGenero();
+            const editId = document.getElementById('edit-id').value;
+
+            if (!esModoDirector && !editId) {
+                const yaExisteNick = padronMagico.find(m => m.nombre.toLowerCase() === nom.toLowerCase());
+                if (yaExisteNick) {
+                    alert(`⚠️ El nombre "${nom}" ya se encuentra registrado con la matrícula ${yaExisteNick.matricula}.`);
+                    return;
+                }
+            }
+
+            let fEmision = Date.now();
+            let fVence = fEmision + MS_TRES_MESES;
+            let infCount = parseInt(document.getElementById('edit-infracciones').value || 0);
+            let suspTS = document.getElementById('edit-suspension-ts').value ? parseInt(document.getElementById('edit-suspension-ts').value) : null;
+
+            if (editId && document.getElementById('edit-emision-ts').value && !document.getElementById('btn-submit').innerText.includes("Renovar")) {
+                fEmision = parseInt(document.getElementById('edit-emision-ts').value);
+                fVence = parseInt(document.getElementById('edit-vence-ts').value);
+            }
+
+            const datosMago = {
+                matricula: matActiva,
+                nombre: nom,
+                genero: genero,
+                casa: casa,
+                empleo: emp,
+                bando: ban,
+                varita: varita,
+                patronus: patronus,
+                emojiBoveda: emojiBoveda,
+                foto: fotoDataURL,
+                ip: miIPPublica,
+                fechaEmision: fEmision,
+                fechaVence: fVence,
+                infracciones: infCount,
+                fechaSuspension: suspTS,
+                director: "Jeremias Snape"
+            };
+
+            mostrarToast("Grabando en el Ministerio Diamante...", "🪄");
+
+            if (editId) {
+                fetch(`${FIREBASE_DB}/${editId}.json`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datosMago)
+                }).then(() => {
+                    mostrarToast("Cédula oficial actualizada con éxito", "✅");
+                    cargarDeFirebase();
+                    limpiarForm();
+                }).catch(err => alert("Error: " + err));
+            } else {
+                fetch(`${FIREBASE_DB}.json`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datosMago)
+                }).then(() => {
+                    localStorage.setItem("HO_MI_CEDULA_MAT", matActiva);
+                    mostrarToast("¡Cédula oficial emitida por 3 meses!", "🎉");
+                    cargarDeFirebase();
+                    limpiarForm();
+                }).catch(err => alert("Error: " + err));
+            }
+        }
+
+        function sancionarMago(fbKey) {
+            if (!esModoDirector) return;
+            const m = padronMagico.find(x => x.fbKey === fbKey);
+            if (!m) return;
+
+            const actualFaltas = m.infracciones || 0;
+            const nuevaFalta = actualFaltas + 1;
+            let suspTS = m.fechaSuspension || null;
+
+            if (nuevaFalta >= 3 && !suspTS) {
+                suspTS = Date.now();
+                alert(`⚠️ ¡ATENCIÓN DIRECTOR! ${m.nombre} ha acumulado 3 infracciones. Su documento queda SUSPENDIDO y se aplica la multa inicial de 100.000 Galeones.`);
+            }
+
+            fetch(`${FIREBASE_DB}/${fbKey}.json`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ infracciones: nuevaFalta, fechaSuspension: suspTS })
+            }).then(() => {
+                mostrarToast(`Falta agregada a ${m.nombre} (${nuevaFalta}/3)`, "⚠️");
+                cargarDeFirebase();
+            });
+        }
+
+        function rehabilitarMago(fbKey) {
+            if (!esModoDirector) return;
+            const m = padronMagico.find(x => x.fbKey === fbKey);
+            if (!m) return;
+
+            const multa = calcularMulta(m.fechaSuspension);
+            if (confirm(`¿Confirmas que ${m.nombre} canceló la multa acumulada de ${multa.toLocaleString()} Galeones en Gringotts? Se restaurará su cédula.`)) {
+                fetch(`${FIREBASE_DB}/${fbKey}.json`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ infracciones: 0, fechaSuspension: null })
+                }).then(() => {
+                    mostrarToast(`¡Cédula de ${m.nombre} rehabilitada exitosamente!`, "🟢");
+                    cargarDeFirebase();
+                });
+            }
+        }
+
+        function eliminarRegistro(fbKey, mat, nom) {
+            if (!esModoDirector) {
+                alert("🔒 Solo el Director Jeremías Snape tiene autorización para revocar cédulas.");
+                return;
+            }
+
+            if (nom.toLowerCase().includes("jeremias snape")) {
+                alert("🛡️ La Cédula del Director Jeremías Snape está blindada y no puede ser eliminada.");
+                return;
+            }
+
+            if (confirm(`¿Revocar y eliminar la matrícula ${mat} de ${nom}?`)) {
+                fetch(`${FIREBASE_DB}/${fbKey}.json`, { method: 'DELETE' })
+                    .then(() => {
+                        mostrarToast(`Matrícula ${mat} eliminada`, "🗑️");
+                        cargarDeFirebase();
+                    });
+            }
+        }
+
+        function cargarParaEditar(fbKey) {
+            if (!esModoDirector) return;
+            const m = padronMagico.find(x => x.fbKey === fbKey);
+            if (!m) return;
+
+            document.getElementById('edit-id').value = m.fbKey;
+            document.getElementById('in-nombre').value = m.nombre;
+            document.getElementById('in-empleo').value = m.empleo;
+            document.getElementById('in-bando').value = m.bando;
+            document.getElementById('in-varita').value = m.varita;
+            document.getElementById('in-patronus').value = m.patronus || "";
+            document.getElementById('in-emoji').value = m.emojiBoveda || m.mascota || "";
+
+            emisionActualTS = m.fechaEmision || m.fecha || Date.now();
+            venceActualTS = m.fechaVence || (emisionActualTS + MS_TRES_MESES);
+            infraccionesActual = m.infracciones || 0;
+            suspensionActualTS = m.fechaSuspension || null;
+
+            document.getElementById('edit-emision-ts').value = emisionActualTS;
+            document.getElementById('edit-vence-ts').value = venceActualTS;
+            document.getElementById('edit-infracciones').value = infraccionesActual;
+            document.getElementById('edit-suspension-ts').value = suspensionActualTS || "";
+
+            const gen = m.genero || 'Hombre';
+            const radGen = document.querySelector(`input[name="r-gen"][value="${gen}"]`);
+            if (radGen) { radGen.checked = true; alCambiarGenero(gen); }
+
+            const rad = document.querySelector(`input[name="r-casa"][value="${m.casa}"]`);
+            if (rad) { rad.checked = true; alCambiarCasa(m.casa); }
+
+            matActiva = m.matricula;
+            document.getElementById('card-mat').innerText = matActiva;
+
+            fotoDataURL = m.foto || FOTO_DEFAULT;
+            document.getElementById('form-foto-thumb').src = fotoDataURL;
+            document.getElementById('card-foto').src = fotoDataURL;
+
+            document.getElementById('badge-edit').style.display = "inline-block";
+            document.getElementById('badge-edit').innerText = "MODO EDICIÓN";
+            document.getElementById('btn-cancel').style.display = "inline-block";
+            document.getElementById('btn-submit').innerHTML = `<span>💾</span> Guardar Cambios`;
+            document.getElementById('form-titulo').innerText = `Editando Matrícula ${m.matricula}`;
+
+            actualizarCard();
+            cambiarSeccion('sec-registro');
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+
+        function limpiarForm() {
+            document.getElementById('form-magico').reset();
+            document.getElementById('edit-id').value = "";
+            document.getElementById('edit-emision-ts').value = "";
+            document.getElementById('edit-vence-ts').value = "";
+            document.getElementById('edit-infracciones').value = "0";
+            document.getElementById('edit-suspension-ts').value = "";
+            document.getElementById('badge-edit').style.display = "none";
+            document.getElementById('btn-cancel').style.display = "none";
+            document.getElementById('btn-submit').innerHTML = `<span>✨</span> Guardar en Bóveda Firebase`;
+            document.getElementById('form-titulo').innerText = "Formulario de Afiliación";
+
+            emisionActualTS = Date.now();
+            venceActualTS = emisionActualTS + MS_TRES_MESES;
+            infraccionesActual = 0;
+            suspensionActualTS = null;
+
+            document.querySelector('input[name="r-gen"][value="Hombre"]').checked = true;
+            alCambiarGenero('Hombre');
+
+            document.querySelector('input[name="r-casa"][value="Slytherin"]').checked = true;
+            alCambiarCasa('Slytherin');
+            restaurarFoto();
+            generarMatricula();
+            actualizarCard();
+            evaluarPermisoCreacion();
+        }
+
+        function renderizarPadron() {
+            const cont = document.getElementById('grid-padron');
+            const q = (document.getElementById('buscador').value || '').toLowerCase();
+
+            const filtrados = padronMagico.filter(m => {
+                const matchCasa = (casaFiltro === 'TODAS') || (m.casa === casaFiltro);
+                const matchTxt = (m.nombre || '').toLowerCase().includes(q) ||
+                                 (m.matricula || '').toLowerCase().includes(q) ||
+                                 (m.empleo || '').toLowerCase().includes(q);
+                return matchCasa && matchTxt;
+            });
+
+            document.getElementById('cont-nav').innerText = padronMagico.length;
+
+            if (filtrados.length === 0) {
+                cont.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:30px; color:#94a3b8;">No hay registros en la Bóveda.</div>`;
+                return;
+            }
+
+            const emojis = { 'Slytherin':'🐍', 'Gryffindor':'🦁', 'Ravenclaw':'🦅', 'Hufflepuff':'🦡' };
+
+            let html = "";
+            filtrados.forEach(m => {
+                const fVence = m.fechaVence || ((m.fechaEmision || m.fecha || Date.now()) + MS_TRES_MESES);
+                const esSuspendido = (m.infracciones || 0) >= 3;
+                const vencida = esVencida(fVence);
+
+                let badgePill = "";
+                let multaInfo = "";
+
+                if (esSuspendido) {
+                    const multa = calcularMulta(m.fechaSuspension);
+                    badgePill = `<span style="background:rgba(239,68,68,0.25); color:#f87171; border:1px solid #ef4444; padding:1px 6px; border-radius:4px; font-size:9px;">⛔ SUSPENDIDA</span>`;
+                    multaInfo = `<div style="color:#f87171; font-weight:bold;"><b>Multa:</b> ${multa.toLocaleString()} G (+100k/día)</div>`;
+                } else if (vencida) {
+                    badgePill = `<span style="background:rgba(234,179,8,0.2); color:#facc15; border:1px solid #eab308; padding:1px 6px; border-radius:4px; font-size:9px;">⏳ CADUCADA</span>`;
+                } else {
+                    badgePill = `<span style="background:rgba(16,185,129,0.2); color:#34d399; border:1px solid #10b981; padding:1px 6px; border-radius:4px; font-size:9px;">🟢 VIGENTE</span>`;
+                }
+
+                let botonesAdmin = "";
+                if (esModoDirector) {
+                    const btnRehab = esSuspendido ? `<button class="m-btn rehabilitar" onclick="rehabilitarMago('${m.fbKey}')">💰 Cobrar y Rehabilitar</button>` : '';
+                    botonesAdmin = `
+                        <button class="m-btn sancion" onclick="sancionarMago('${m.fbKey}')">⚠️ +1 Falta</button>
+                        ${btnRehab}
+                        <button class="m-btn" onclick="cargarParaEditar('${m.fbKey}')">✏️</button>
+                        <button class="m-btn del" onclick="eliminarRegistro('${m.fbKey}', '${m.matricula}', '${m.nombre}')">🗑️</button>
+                    `;
+                }
+
+                const genSym = m.genero === "Mujer" ? '<b style="color:#f472b6;">♀</b>' : '<b style="color:#60a5fa;">♂</b>';
+                const cardClass = esSuspendido ? "m-card card-border-suspendida" : "m-card";
+
+                html += `
+                    <div class="${cardClass}">
+                        <div class="m-card-top">
+                            <img src="${m.foto || FOTO_DEFAULT}" class="m-thumb" alt="${m.nombre}">
+                            <div class="m-meta">
+                                <h4>${m.nombre} ${genSym}</h4>
+                                <span style="color:var(--house-b);">${emojis[m.casa] || ''} ${m.casa} • <b style="font-family:monospace; color:#f7e29c;">${m.matricula}</b></span>
+                                <div style="margin-top:2px;">${badgePill}</div>
+                            </div>
+                        </div>
+                        <div class="m-pills">
+                            <div><b>Infracciones:</b> <span style="color:${(m.infracciones||0)>=3?'#ef4444':'#e2e8f0'}; font-weight:bold;">${m.infracciones || 0} / 3</span></div>
+                            ${multaInfo}
+                            <div><b>Patronus:</b> ${m.patronus || '—'}</div>
+                            <div><b>Bóveda (Emoji):</b> ${m.emojiBoveda || m.mascota || '—'}</div>
+                            <div><b>Emisión:</b> ${formatearFecha(m.fechaEmision || m.fecha)}</div>
+                            <div><b>Vencimiento:</b> ${formatearFecha(fVence)}</div>
+                        </div>
+                        <div class="m-actions">
+                            <button class="m-btn" onclick="verCredencialDirecta('${m.fbKey}', true)">👁️ Ver Cédula</button>
+                            ${botonesAdmin}
+                        </div>
+                    </div>
+                `;
+            });
+            cont.innerHTML = html;
+        }
+
+        function verCredencialDirecta(fbKey, irASeccion = true) {
+            const m = padronMagico.find(x => x.fbKey === fbKey);
+            if (!m) return;
+
+            matActiva = m.matricula;
+            fotoDataURL = m.foto || FOTO_DEFAULT;
+            
+            emisionActualTS = m.fechaEmision || m.fecha || Date.now();
+            venceActualTS = m.fechaVence || (emisionActualTS + MS_TRES_MESES);
+            infraccionesActual = m.infracciones || 0;
+            suspensionActualTS = m.fechaSuspension || null;
+
+            document.getElementById('in-nombre').value = m.nombre || "";
+            document.getElementById('in-empleo').value = m.empleo || "";
+            document.getElementById('in-bando').value = m.bando || "";
+            document.getElementById('in-varita').value = m.varita || "";
+            document.getElementById('in-patronus').value = m.patronus || "";
+            document.getElementById('in-emoji').value = m.emojiBoveda || m.mascota || "";
+
+            const gen = m.genero || 'Hombre';
+            const radGen = document.querySelector(`input[name="r-gen"][value="${gen}"]`);
+            if (radGen) { radGen.checked = true; alCambiarGenero(gen); }
+
+            const rad = document.querySelector(`input[name="r-casa"][value="${m.casa}"]`);
+            if (rad) { rad.checked = true; alCambiarCasa(m.casa); }
+
+            document.getElementById('card-mat').innerText = m.matricula;
+            document.getElementById('card-foto').src = fotoDataURL;
+
+            actualizarCard();
+
+            if (irASeccion) {
+                cambiarSeccion('sec-registro');
+                window.scrollTo({ top: 120, behavior: 'smooth' });
+                mostrarToast(`Cédula de ${m.nombre} cargada`, "🪪");
+            }
+        }
+
+        function filtrarCasa(c, btn) {
+            casaFiltro = c;
+            document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+            btn.classList.add('active');
+            renderizarPadron();
+        }
+
+        function filtrarPadron() { renderizarPadron(); }
+
+        function actualizarEstadisticas() {
+            const tot = padronMagico.length;
+            document.getElementById('kpi-tot').innerText = tot;
+
+            let vigentes = 0;
+            let suspendidos = 0;
+            const cCount = { Slytherin:0, Gryffindor:0, Ravenclaw:0, Hufflepuff:0 };
+
+            padronMagico.forEach(m => {
+                if (cCount[m.casa] !== undefined) cCount[m.casa]++;
+                if ((m.infracciones || 0) >= 3) {
+                    suspendidos++;
+                } else {
+                    const fV = m.fechaVence || ((m.fechaEmision || m.fecha || Date.now()) + MS_TRES_MESES);
+                    if (!esVencida(fV)) vigentes++;
+                }
+            });
+
+            document.getElementById('kpi-vig').innerText = vigentes;
+            document.getElementById('kpi-sus').innerText = suspendidos;
+
+            const porc = (n) => tot > 0 ? ((n / tot) * 100).toFixed(1) : 0;
+
+            document.getElementById('lb-sly').innerText = `${cCount.Slytherin} (${porc(cCount.Slytherin)}%)`;
+            document.getElementById('pb-sly').style.width = `${porc(cCount.Slytherin)}%`;
+
+            document.getElementById('lb-gry').innerText = `${cCount.Gryffindor} (${porc(cCount.Gryffindor)}%)`;
+            document.getElementById('pb-gry').style.width = `${porc(cCount.Gryffindor)}%`;
+
+            document.getElementById('lb-rav').innerText = `${cCount.Ravenclaw} (${porc(cCount.Ravenclaw)}%)`;
+            document.getElementById('pb-rav').style.width = `${porc(cCount.Ravenclaw)}%`;
+
+            document.getElementById('lb-huf').innerText = `${cCount.Hufflepuff} (${porc(cCount.Hufflepuff)}%)`;
+            document.getElementById('pb-huf').style.width = `${porc(cCount.Hufflepuff)}%`;
+        }
+
+        function descargarPNG() {
+            const card = document.getElementById('nodo-carnet');
+            const estabaVolteado = card.classList.contains('flipped');
+            if (estabaVolteado) card.classList.remove('flipped');
+
+            mostrarToast("Grabando pergamino oficial...", "🪄");
+
+            setTimeout(() => {
+                html2canvas(card.querySelector('.card-front'), {
+                    scale: 3, useCORS: true, backgroundColor: null
+                }).then(canvas => {
+                    const a = document.createElement('a');
+                    const nom = document.getElementById('card-nom').innerText.replace(/[^a-zA-Z0-9_-]/g, '_');
+                    a.download = `Cedula_${matActiva}_${nom}.png`;
+                    a.href = canvas.toDataURL("image/png");
+                    a.click();
+                    mostrarToast("Cédula descargada", "📸");
+                    if (estabaVolteado) card.classList.add('flipped');
+                });
+            }, 250);
+        }
+
+        function imprimirCarnet() { window.print(); }
+
+        function copiarWhatsApp() {
+            const nom = document.getElementById('card-nom').innerText;
+            const cs = document.getElementById('card-cs').innerText;
+            const emp = document.getElementById('card-emp').innerText;
+            const varita = document.getElementById('card-var').innerText;
+            const patronus = document.getElementById('card-pat').innerText;
+            const emojiBoveda = document.getElementById('card-emj').innerText;
+            const ban = document.getElementById('card-ban').innerText;
+            const gen = getGenero();
+            const genTxt = gen === "Mujer" ? "♀ Bruja" : "♂ Mago";
+
+            const esSuspendida = infraccionesActual >= 3;
+            const vencida = esVencida(venceActualTS);
+
+            let estadoTexto = "🟢 VIGENTE (3 MESES)";
+            let lineaMultaWA = "";
+
+            if (esSuspendida) {
+                const multa = calcularMulta(suspensionActualTS);
+                estadoTexto = "⛔ SUSPENDIDA (3/3 INFRACCIONES)";
+                lineaMultaWA = `│ 💰 𝙈𝙪𝙡𝙩𝙖 𝙙𝙚 𝙍𝙚𝙥𝙤𝙨𝙞𝙘𝙞ó𝙣: ${multa.toLocaleString()} Galeones (+100.000 G/día)\n`;
+            } else if (vencida) {
+                estadoTexto = "⏳ CADUCADA / REQUIERE RENOVACIÓN";
+            }
+
+            const linkVerificacion = obtenerURLExterna(matActiva);
+
+            const ficha = 
+`╭── 💼 𝙍𝙀𝙂𝙄𝙎𝙏𝙍𝙊 𝙈Á𝙂𝙄𝘾𝙊 𝙃.𝙊 💼 ──╮
+│ 🏛️ 𝙈𝙞𝙣𝙞𝙨𝙩𝙚𝙧𝙞𝙤 𝘿𝙞𝙖𝙢𝙖𝙣𝙩𝙚 • 𝙊𝙧𝙞ó𝙣
+├────────────────────────────
+│ 📜 𝙈𝙖𝙩𝙧í𝙘𝙪𝙡𝙖: ${matActiva}
+│ 🧙‍♂️ 𝙈𝙖𝙜𝙤 / 𝘽𝙧𝙪𝙟𝙖: ${nom} (${genTxt})
+│ 🏰 𝘾𝙖𝙨𝙖: ${cs}
+│ 💼 𝙀𝙢𝙥𝙡𝙚𝙤 / 𝙍𝙖𝙣𝙜𝙤: ${emp}
+│ 🪄 𝙑𝙖𝙧𝙞𝙩𝙖: ${varita}
+│ ✨ 𝙋𝙖𝙩𝙧𝙤𝙣𝙪𝙨: ${patronus}
+│ 🏦 𝙀𝙢𝙤𝙟𝙞 𝙙𝙚 𝘽ó𝙫𝙚𝙙𝙖 (𝙂𝙧𝙞𝙣𝙜𝙤𝙩𝙩𝙨): ${emojiBoveda}
+│ 🩸 𝙀𝙨𝙩𝙖𝙙𝙤 / 𝘽𝙖𝙣𝙙𝙤: ${ban}
+├────────────────────────────
+│ ⚠️ 𝙄𝙣𝙛𝙧𝙖𝙘𝙘𝙞𝙤𝙣𝙚𝙨: ${infraccionesActual} / 3
+${lineaMultaWA}│ 📅 𝙀𝙢𝙞𝙨𝙞ó𝙣: ${formatearFecha(emisionActualTS)}
+│ ⏳ 𝙑𝙚𝙣𝙘𝙞𝙢𝙞𝙚𝙣𝙩𝙤: ${formatearFecha(venceActualTS)}
+│ 🔐 𝙀𝙨𝙩𝙖𝙙𝙤: ${estadoTexto}
+│ 🔗 𝙑𝙚𝙧 𝘾é𝙙𝙪𝙡𝙖 𝙚𝙣 𝙡í𝙣𝙚𝙖: ${linkVerificacion}
+│ ✒️ 𝙁𝙞𝙧𝙢𝙖: 𝙅𝙚𝙧𝙚𝙢𝙞𝙖𝙨 𝙎𝙣𝙖𝙥𝙚 (𝘿𝙞𝙧𝙚𝙘𝙩𝙤𝙧)
+│ 🪄 𝙑á𝙡𝙞𝙙𝙤 𝙚𝙣 𝙩𝙤𝙙𝙤 𝙃𝙤𝙜𝙬𝙖𝙧𝙩𝙨 𝙊𝙧𝙞ó𝙣
+╰────────────────────────────╯`;
+
+            navigator.clipboard.writeText(ficha).then(() => {
+                mostrarToast("Ficha copiada con enlace oficial", "📋");
+            });
+        }
+
+        function cambiarSeccion(secId, btn = null) {
+            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(secId).classList.add('active-view');
+            if (btn) btn.classList.add('active');
+            else {
+                const tabs = document.querySelectorAll('.nav-btn');
+                if (secId === 'sec-registro') tabs[0].classList.add('active');
+                if (secId === 'sec-padron') tabs[1].classList.add('active');
+                if (secId === 'sec-censo') tabs[2].classList.add('active');
+            }
+        }
+
+        function abrirModalQR() {
+            const modal = document.getElementById('modal-qr');
+            const linkReal = obtenerURLExterna(matActiva);
+
+            new QRious({
+                element: document.getElementById('qr-modal-canvas'),
+                value: linkReal,
+                size: 150, level: 'H'
+            });
+
+            document.getElementById('qr-link-input').value = linkReal;
+
+            let estadoHtml = `<span style="color:#10b981; font-weight:bold;">🟢 VIGENTE</span>`;
+            if (infraccionesActual >= 3) {
+                const multa = calcularMulta(suspensionActualTS);
+                estadoHtml = `<span style="color:#ef4444; font-weight:bold;">⛔ SUSPENDIDA (Multa: ${multa.toLocaleString()} G)</span>`;
+            } else if (esVencida(venceActualTS)) {
+                estadoHtml = `<span style="color:#facc15; font-weight:bold;">⏳ CADUCADA</span>`;
+            }
+
+            document.getElementById('qr-desc').innerHTML = `
+                <b>Cédula N°:</b> ${matActiva}<br>
+                <b>Titular:</b> ${document.getElementById('card-nom').innerText}<br>
+                <b>Infracciones:</b> ${infraccionesActual}/3<br>
+                <b>Estado:</b> ${estadoHtml}<br>
+                <b>Firma:</b> Jeremías Snape (Director)
+            `;
+            modal.style.display = 'flex';
+        }
+
+        function copiarEnlaceQR() {
+            const linkInput = document.getElementById('qr-link-input');
+            navigator.clipboard.writeText(linkInput.value).then(() => {
+                mostrarToast("Enlace al documento copiado", "🔗");
+            });
+        }
+
+        function cerrarModalQR() { document.getElementById('modal-qr').style.display = 'none'; }
+
+        let tTimeout;
+        function mostrarToast(msg, ico = "✨") {
+            const t = document.getElementById('toast');
+            document.getElementById('t-msg').innerText = msg;
+            document.getElementById('t-ico').innerText = ico;
+            t.classList.add('show');
+            clearTimeout(tTimeout);
+            tTimeout = setTimeout(() => t.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
